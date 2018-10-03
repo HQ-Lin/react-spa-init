@@ -4,8 +4,8 @@ const swConfig = require('./sw-config');
 
 module.exports = function config (DEPLOY_ENV = 'dev') {
     return merge({
+        swConfig,
         resolve: {
-            swConfig,
             extensions: ['.js','.jsx','.scss','.json'], // 自动补充后缀
             alias: {    // 定义路径别名
                 '@': path.resolve(__dirname, '../src/'),
