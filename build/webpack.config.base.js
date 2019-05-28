@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const {resolve} = require('./utils');
@@ -35,7 +36,7 @@ const webpackBaseConfig = function (DEPLOY_ENV = 'prod') {
                     loader: 'url-loader',
                     query: {
                         limit: 8192,
-                        publicPath: config.publicPath,
+                        publicPath: config.publicPath + config.imgPath,
                         outputPath: config.imgPath,
                         useRelativePath: false,
                         name: config.filenameHash ? '[name].[hash].[ext]' : '[name].[ext]?[hash]'
@@ -46,7 +47,7 @@ const webpackBaseConfig = function (DEPLOY_ENV = 'prod') {
                     loader: 'url-loader',
                     query: {
                         limit: 8192,
-                        publicPath: config.publicPath,
+                        publicPath: config.publicPath + 'fonts/',
                         outputPath: 'fonts/',
                         useRelativePath: false,
                         name: config.filenameHash ? '[name].[hash].[ext]' : '[name].[ext]?[hash]'
@@ -61,18 +62,20 @@ const webpackBaseConfig = function (DEPLOY_ENV = 'prod') {
                 template: resolve('public/index.html'),
                 favicon: resolve('public/favicon.ico'),
             }),
+            new ProgressBarPlugin(),
             new SWPrecacheWebpackPlugin(config.swConfig),
         ],
 
         optimization: {
+            // 持久化缓存
+            runtimeChunk: {
+                name: 'runtime',
+            },
             splitChunks: {
+                chunks: 'all',
+                minSize: 0,
+                maxInitialRequests: Infinity,
                 cacheGroups: {
-                    commons: {
-                        chunks: "initial",
-                        minChunks: 2,
-                        maxInitialRequests: 5, // The default limit is too small to showcase the effect
-                        minSize: 0 // This is example is too small to create commons chunks
-                    },
                     vendor: {
                         test: /node_modules/,
                         chunks: "initial",
@@ -82,9 +85,6 @@ const webpackBaseConfig = function (DEPLOY_ENV = 'prod') {
                     }
                 }
             },
-            runtimeChunk: {
-                name: 'runtime',
-            }
         }
     };
 

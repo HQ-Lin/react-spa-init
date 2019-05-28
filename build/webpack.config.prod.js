@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const {resolve} = require('./utils');
 
@@ -37,7 +38,8 @@ const webpackConfig = merge(webpackBaseConfig, {
     plugins: [
         new MiniCssExtractPlugin({
             filename: filenameHash ? `${config.cssPath}[name].[contenthash].css` : `${config.cssPath}[name].css?[contenthash]`
-        })
+        }),
+        new OptimizeCSSAssetsPlugin(),
     ]
 });
 
