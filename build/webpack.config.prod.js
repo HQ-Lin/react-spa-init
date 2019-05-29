@@ -1,5 +1,5 @@
 const merge = require('webpack-merge');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const {resolve} = require('./utils');
@@ -14,9 +14,9 @@ const filenameHash = config.filenameHash;
 const webpackConfig = merge(webpackBaseConfig, {
     mode: 'production',
     output: {
-        filename: filenameHash ? `${config.jsPath}[name].[chunkhash].js` : `${config.jsPath}[name].js?[chunkhash]`,
+        filename: filenameHash ? `${config.jsPath}[name].[contenthash].js` : `${config.jsPath}[name].js?[contenthash]`,
         path: resolve('dist'),
-        chunkFilename: filenameHash ? `${config.jsPath}[name].[chunkhash].js` : `${config.jsPath}[name].js?[chunkhash]`, // for the require.ensure
+        chunkFilename: filenameHash ? `${config.jsPath}[name].[contenthash].js` : `${config.jsPath}[name].js?[contenthash]`, // for the require.ensure
         publicPath: config.publicPath
     },
     performance: {
@@ -30,7 +30,7 @@ const webpackConfig = merge(webpackBaseConfig, {
                     MiniCssExtractPlugin.loader,
                     'css-loader',
                     'postcss-loader',
-                    "sass-loader",
+                    'sass-loader',
                 ],
             },
         ]

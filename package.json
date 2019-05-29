@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "webpack-dev-server --config build/webpack.config.dev.js",
+    "start": "webpack-dev-server --config build/webpack.config.dev.js",
     "build": "npm run clean && webpack --config build/webpack.config.prod.js",
     "lint": "eslint --ext .js src",
     "clean": "rimraf dist"
@@ -14,6 +13,8 @@
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "react-hot-loader": "^4.8.8",
     "autoprefixer": "^9.5.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
@@ -41,6 +42,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "core-js": "^3.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

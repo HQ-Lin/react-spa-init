@@ -1,11 +1,8 @@
-const merge = require('webpack-merge');
-const release = require('./prod');
-
-module.exports = merge(release, {
+module.exports = {
     devServer: {
-        // host: "0.0.0.0",
-        hot: true,
+        host: '0.0.0.0',
         inline: true,
+        hot: true,
         port: 8888,
         compress: true,
         historyApiFallback: true,
@@ -16,7 +13,6 @@ module.exports = merge(release, {
             errors: true,   // 编译出现错误时，错误直接贴到页面上
         }
     },
-    publicPath: '',
     devtool: 'cheap-module-eval-source-map',
     filenameHash: false,    // 生成带hash文件名
-});
+};

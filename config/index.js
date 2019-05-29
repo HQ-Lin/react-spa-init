@@ -2,7 +2,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 const swConfig = require('./sw-config');
 
-module.exports = function config (DEPLOY_ENV = 'dev') {
+module.exports = (DEPLOY_ENV = 'dev') => {
     return merge({
         swConfig,
         resolve: {
@@ -14,5 +14,10 @@ module.exports = function config (DEPLOY_ENV = 'dev') {
                 '@components': path.resolve(__dirname, '../src/components'),
             }
         },
+        //类型静态资源访问路径
+        jsPath: 'static/js/',
+        cssPath: 'static/css/',
+        imgPath: 'static/media/',
+        publicPath: '',
     }, require(path.join(__dirname, DEPLOY_ENV)));
-}
+};

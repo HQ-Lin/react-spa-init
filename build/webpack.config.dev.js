@@ -1,20 +1,11 @@
+const webpack = require('webpack');
 const merge = require('webpack-merge');
-
-const {resolve} = require('./utils');
 
 const config = require('../config/dev');
 const webpackBaseConfig = require('./webpack.config.base')('dev');
 
-const filenameHash = config.filenameHash;
-
 const webpackConfig = merge(webpackBaseConfig, {
     mode: 'development',
-    output: {
-        filename: filenameHash ? `${config.jsPath}[name].[hash].js` : `${config.jsPath}[name].js?[hash]`,
-        path: resolve('dist'),
-        publicPath: config.publicPath,
-        chunkFilename: filenameHash ? `${config.jsPath}[name].[hash].js` : `${config.jsPath}[name].js?[hash]`, // for the require.ensure
-    },
     module: {
         rules: [
             {
@@ -28,6 +19,9 @@ const webpackConfig = merge(webpackBaseConfig, {
             },
         ]
     },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+    ],
     devServer: config.devServer
 });
 

@@ -26,7 +26,7 @@ const webpackBaseConfig = function (DEPLOY_ENV = 'prod') {
                     test: /\.html$/,
                     use: [
                         {
-                            loader: "html-loader",
+                            loader: 'html-loader',
                             options: { minimize: true }
                         }
                     ]
@@ -78,8 +78,8 @@ const webpackBaseConfig = function (DEPLOY_ENV = 'prod') {
                 cacheGroups: {
                     vendor: {
                         test: /node_modules/,
-                        chunks: "initial",
-                        name: "vendor",
+                        chunks: 'initial',
+                        name: 'vendor',
                         priority: 10,
                         enforce: true
                     }
