@@ -1,5 +1,6 @@
 module.exports = {
     "extends": "eslint:recommended",
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 8,
         "sourceType": "module",
@@ -13,7 +14,7 @@ module.exports = {
         "browser": true
     },
     "globals": {},
-    "plugins": ["react"],
+    "plugins": ["react", "react-hooks"],
     "rules": {
         "semi": 2,
         "no-console": 0,
@@ -31,5 +32,7 @@ module.exports = {
         "no-const-assign": 2, //禁止修改const声明的变量
         "no-func-assign": 2, //禁止重复的函数声明
         "no-redeclare": 2, //禁止重复声明变量
+        "react-hooks/rules-of-hooks": 'error',
+        "react-hooks/exhaustive-deps": 'warn' // <--- THIS IS THE N
     }
 }
